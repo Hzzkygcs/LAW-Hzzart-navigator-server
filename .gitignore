@@ -1,0 +1,13 @@
+**/node_modules/
+**/*node_modules/
+**/__pycache__/
+**/.idea/
+**/package-lock.json
+**/coverage/
+**/venv/
+**/temp/
+**/profiling/
+**/venv/
+**/pip-cache/
+**/.env
+video-processor/uploads/
