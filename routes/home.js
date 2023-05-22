@@ -16,6 +16,10 @@ function env_to_dict() {
     const ret = {};
     const environments = all_env_that_starts_with_hzzart();
     for (const environment of environments){
+        ret[environment] = process.env[environment];  // duplicate, two version.
+    }
+
+    for (const environment of environments){
         const splitteds = environment.split("_");
 
         let current_dict = ret;
