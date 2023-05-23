@@ -2,6 +2,8 @@ require("express-async-errors");
 const express = require("express");
 const {route} = require("./routes/home");
 const {visitRoute} = require("./routes/visit");
+const {consulHealthRoute} = require("./routes/consul");
+const {redirectToFrontendGcp} = require("./routes/gcp");
 
 
 
@@ -12,6 +14,8 @@ module.exports.server = async function () {
 
     app.use(route);
     app.use(visitRoute);
+    app.use(consulHealthRoute);
+    app.use(redirectToFrontendGcp);
 
 
     let PORT = process.env.PORT;
