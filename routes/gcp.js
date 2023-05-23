@@ -8,7 +8,9 @@ const NO_INSTANCE_RUNNING_GCP = "I'm sorry, currently no services are running. "
 
 route.get("/gcp", async (_req, res) => {
     try{
+        console.log("Inside try catch. Getting consul singleton");
         await getConsulSingleton(80, 'navigator-heroku');  // initialize
+        console.log("Fetching all healthy service url");
         const services = await getAllHealthyServiceUrl('frontend-service');
         if (services == null || services.length === 0)
             return res.header('x-err', 'Consul is active but no frontend services are running')
