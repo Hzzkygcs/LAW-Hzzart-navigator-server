@@ -3,6 +3,7 @@ const stun = require('stun');
 const axios = require("axios");
 const Consul = require('consul');
 const {navigatorServer} = require("./creds");
+const ping = require("ping");
 
 
 
@@ -23,6 +24,8 @@ async function getConsulSingleton(port=null, seviceName=null){
 module.exports.getConsulSingleton = getConsulSingleton;
 
 async function getConsulClient(thisServicePort, thisServiceName) {
+    await checkConsulAlive();
+
     const ip = (await getIpAndPort()).ipAddr;
     const consulAddr = await getEurekaServerAddr();
     console.log(`Consul (${consulAddr})`)
@@ -52,6 +55,14 @@ async function getConsulClient(thisServicePort, thisServiceName) {
 }
 module.exports.getConsulClient = getConsulClient;
 
+
+async function checkConsulAlive() {
+    await axios({
+        url: await getEurekaServerAddr(),
+        method: "GET",
+        timeout: 4,
+    });
+}
 
 
 async function getAnyHealthyServiceHostName(serviceName, fallback, trailingSlash=false) {
