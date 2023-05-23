@@ -1,6 +1,7 @@
 require("express-async-errors");
 const express = require("express");
 const {route} = require("./routes/home");
+const {visitRoute} = require("./routes/visit");
 
 
 
@@ -10,6 +11,7 @@ module.exports.server = async function () {
     app.use(express.json());
 
     app.use(route);
+    app.use(visitRoute);
 
 
     let PORT = process.env.PORT;
