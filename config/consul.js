@@ -46,11 +46,11 @@ async function getConsulClient(thisServicePort, thisServiceName) {
         id: getInstanceId(thisServiceName, ip),
         address: ip,
         port: thisServicePort,
-        check: {
+        /*check: {
             http: `http://${ip}:${thisServicePort}/health`,
             interval: '10s',
             timeout: '5s',
-        },
+        },*/
     });
     console.log("Registered to Consul successfully");
     return consul;
