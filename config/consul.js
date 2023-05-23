@@ -4,6 +4,7 @@ const axios = require("axios");
 const Consul = require('consul');
 const {navigatorServer} = require("./creds");
 const ping = require("ping");
+const url = require("url");
 
 
 
@@ -57,11 +58,15 @@ module.exports.getConsulClient = getConsulClient;
 
 
 async function checkConsulAlive() {
+    const urlendpoint = "http://" + await getEurekaServerAddr()
+        + ":" + process.env.hzzart_EurekaElkStack_consulport;
+    console.log("checking ", urlendpoint);
     await axios({
-        url: await getEurekaServerAddr(),
+        url: urlendpoint.toString(),
         method: "GET",
-        timeout: 4,
+        timeout: 5000,
     });
+    console.log("check successful");
 }
 
 
@@ -109,7 +114,7 @@ async function getAllHealthyServiceUrl(serviceName) {
     }
     return ret;
 }
-module.exports.getAllHealthyServiceHostName = getAllHealthyServiceUrl;
+module.exports.getAllHealthyServiceUrl = getAllHealthyServiceUrl;
 
 
 

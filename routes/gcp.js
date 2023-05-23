@@ -20,7 +20,7 @@ route.get("/gcp", async (_req, res) => {
         console.log(service)
         return res.redirect(service);
     }catch (e) {
-        console.log("EXCEPTION")
+        console.log("EXCEPTION ", e)
         res.header('x-err', 'Cannot reach Consul GCP instance')
             .status(404).send(NO_INSTANCE_RUNNING_GCP);
     }
