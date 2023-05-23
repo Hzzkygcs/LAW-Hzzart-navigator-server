@@ -14,14 +14,14 @@ route.get("/gcp", async (_req, res) => {
         const services = await getAllHealthyServiceUrl('frontend-service');
         if (services == null || services.length === 0)
             return res.header('x-err', 'Consul is active but no frontend services are running')
-                .status(503).send(NO_INSTANCE_RUNNING_GCP);
+                .status(404).send(NO_INSTANCE_RUNNING_GCP);
         let service = url.parse(services[0]).hostname;
         service = `http://${service}`;
         console.log(service)
         res.redirect(service);
     }catch (e) {
         res.header('x-err', 'Cannot reach Consul GCP instance')
-            .status(503).send(NO_INSTANCE_RUNNING_GCP);
+            .status(404).send(NO_INSTANCE_RUNNING_GCP);
     }
 });
 
