@@ -2,7 +2,7 @@
 const stun = require('stun');
 const axios = require("axios");
 const Consul = require('consul');
-const {navigatorServer, host} = require("./creds");
+const {navigatorServer} = require("./creds");
 
 
 
@@ -98,12 +98,12 @@ async function getAllHealthyServiceUrl(serviceName) {
     }
     return ret;
 }
-module.exports.getAllHealthyServiceUrl = getAllHealthyServiceUrl;
+module.exports.getAllHealthyServiceHostName = getAllHealthyServiceUrl;
 
 
 
 function getInstanceId(serviceName, ipAddress) {
-    return `${serviceName}-${ipAddress}-${host()}`
+    return `${serviceName}-${ipAddress}-${process.env.HOSTNAME}`
 }
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);

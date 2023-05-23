@@ -1,7 +1,7 @@
 
 
 function navigatorServer() {
-    return "https://hzzart-navigator-server.herokuapp.com/"
+    return "https://hzzart-navigator-server.herokuapp.com"
 }
 module.exports.navigatorServer = navigatorServer;
 
