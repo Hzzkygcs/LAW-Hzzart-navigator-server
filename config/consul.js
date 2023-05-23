@@ -54,7 +54,7 @@ module.exports.getConsulClient = getConsulClient;
 
 
 
-async function getAnyHealthyServiceHostName(serviceName, fallback, trailingSlash=false) {  // TODO
+async function getAnyHealthyServiceHostName(serviceName, fallback, trailingSlash=false) {
     let result;
     try{
         result = await getAllHealthyServiceUrl(serviceName);
