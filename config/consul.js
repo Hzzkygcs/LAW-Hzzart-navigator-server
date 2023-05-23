@@ -14,6 +14,9 @@ const url = require("url");
 let consulSingleton = null;
 
 async function getConsulSingleton(port=null, seviceName=null){
+    console.log("consulSingleton", consulSingleton);
+    await checkConsulAlive();
+
     if (consulSingleton == null){
         if (port==null || seviceName==null){
             throw new Error(`eurekaSingleton is null when calling getEurekaSingleton(${port}, ${seviceName})`)
@@ -25,8 +28,6 @@ async function getConsulSingleton(port=null, seviceName=null){
 module.exports.getConsulSingleton = getConsulSingleton;
 
 async function getConsulClient(thisServicePort, thisServiceName) {
-    await checkConsulAlive();
-
     const ip = (await getIpAndPort()).ipAddr;
     const consulAddr = await getEurekaServerAddr();
     console.log(`Consul (${consulAddr})`)
