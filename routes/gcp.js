@@ -12,7 +12,7 @@ route.get("/gcp", async (_req, res) => {
         if (services == null || services.length === 0)
             return res.header('x-err', 'Consul is active but no frontend services are running')
                 .status(503).send(NO_INSTANCE_RUNNING_GCP);
-        const service = services[0];
+        const service = services[0].split(":")[0];
         console.log(service)
         res.redirect(service);
     }catch (e) {
