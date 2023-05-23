@@ -1,5 +1,6 @@
 const express = require("express");
 const {getConsulSingleton, getAnyHealthyServiceHostName, getAllHealthyServiceUrl} = require("../config/consul");
+const url = require("url");
 const route = express.Router();
 
 const NO_INSTANCE_RUNNING_GCP = "I'm sorry, currently no services are running. " +
@@ -12,7 +13,8 @@ route.get("/gcp", async (_req, res) => {
         if (services == null || services.length === 0)
             return res.header('x-err', 'Consul is active but no frontend services are running')
                 .status(503).send(NO_INSTANCE_RUNNING_GCP);
-        const service = services[0].split(":")[0];
+        let service = url.parse(services[0]).hostname;
+        service = `http://${service}`;
         console.log(service)
         res.redirect(service);
     }catch (e) {
