@@ -4,6 +4,7 @@ const {route} = require("./routes/home");
 const {visitRoute} = require("./routes/visit");
 const {consulHealthRoute} = require("./routes/consul");
 const {redirectToFrontendGcp} = require("./routes/gcp");
+const {unregisterUnhealthyServiceRoute} = require("./routes/unregister-unhealthy-nodes");
 
 
 
@@ -16,6 +17,7 @@ module.exports.server = async function () {
     app.use(visitRoute);
     app.use(consulHealthRoute);
     app.use(redirectToFrontendGcp);
+    app.use(unregisterUnhealthyServiceRoute);
 
 
     let PORT = process.env.PORT;
